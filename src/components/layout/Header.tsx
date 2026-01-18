@@ -5,6 +5,17 @@ import { Menu, X, ShoppingCart, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/klenzo-logo.png";
 
+// CSS filter to make logo white/light when on dark backgrounds
+const lightLogoStyle = {
+  filter: "brightness(0) invert(1)",
+  transition: "filter 0.3s ease",
+};
+
+const normalLogoStyle = {
+  filter: "none",
+  transition: "filter 0.3s ease",
+};
+
 const navLinks = [
   { name: "The Solution", href: "/" },
   { name: "Shop", href: "/shop" },
@@ -34,46 +45,59 @@ export function Header() {
     >
       <div className="klenzo-container">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+          {/* Logo - Light version when at top (on hero), normal when scrolled */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Klenzo" className="h-10 w-auto" />
+            <img 
+              src={logo} 
+              alt="Klenzo" 
+              className="h-10 w-auto"
+              style={!isScrolled && location.pathname === "/" ? lightLogoStyle : normalLogoStyle}
+            />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === link.href
-                    ? "text-accent"
-                    : isScrolled
-                    ? "text-foreground hover:text-accent"
-                    : "text-primary hover:text-accent"
-                }`}
-              >
-                {link.name}
-              </Link>
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    location.pathname === link.href
+                      ? isScrolled ? "text-accent" : "text-white"
+                      : isScrolled
+                      ? "text-foreground hover:text-accent"
+                      : "text-white/80 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
             ))}
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
             <Link to="/portal">
-              <Button variant="ghost" size="icon">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className={!isScrolled && location.pathname === "/" ? "text-white hover:text-white hover:bg-white/10" : ""}
+              >
                 <User className="h-5 w-5" />
               </Button>
             </Link>
             <Link to="/shop">
-              <Button variant="ghost" size="icon" className="relative">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className={`relative ${!isScrolled && location.pathname === "/" ? "text-white hover:text-white hover:bg-white/10" : ""}`}
+              >
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
                   0
                 </span>
               </Button>
             </Link>
-            <Button variant="cta" size="sm">
+            <Button variant={!isScrolled && location.pathname === "/" ? "heroOutline" : "cta"} size="sm">
               Request Sample Kit
             </Button>
           </div>
@@ -84,9 +108,9 @@ export function Header() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-foreground" />
+              <X className={`h-6 w-6 ${!isScrolled && location.pathname === "/" ? "text-white" : "text-foreground"}`} />
             ) : (
-              <Menu className="h-6 w-6 text-foreground" />
+              <Menu className={`h-6 w-6 ${!isScrolled && location.pathname === "/" ? "text-white" : "text-foreground"}`} />
             )}
           </button>
         </div>
