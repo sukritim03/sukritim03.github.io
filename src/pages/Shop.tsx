@@ -16,23 +16,23 @@ import {
   Shield
 } from "lucide-react";
 
-// Mock product data
+// Mock product data with real images and Indian market pricing
 const products = [
   // Hardware
-  { id: 1, name: "Industrial Floor Scrubber FS-500", category: "hardware", price: 45000, unit: "unit", image: "🧹", sku: "KLZ-FS-500" },
-  { id: 2, name: "Commercial Vacuum Cleaner Pro", category: "hardware", price: 12500, unit: "unit", image: "🔌", sku: "KLZ-VC-PRO" },
-  { id: 3, name: "High-Pressure Washer 2000 PSI", category: "hardware", price: 28000, unit: "unit", image: "💨", sku: "KLZ-PW-2K" },
-  { id: 4, name: "Microfiber Mop System Set", category: "hardware", price: 3500, unit: "set", image: "🧽", sku: "KLZ-MMS-01" },
+  { id: 1, name: "Industrial Floor Scrubber FS-500", category: "hardware", price: 24999, unit: "unit", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop", sku: "KLZ-FS-500" },
+  { id: 2, name: "Commercial Vacuum Cleaner Pro", category: "hardware", price: 6499, unit: "unit", image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=400&fit=crop", sku: "KLZ-VC-PRO" },
+  { id: 3, name: "High-Pressure Washer 2000 PSI", category: "hardware", price: 14999, unit: "unit", image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=400&fit=crop", sku: "KLZ-PW-2K" },
+  { id: 4, name: "Microfiber Mop System Set", category: "hardware", price: 1299, unit: "set", image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&h=400&fit=crop", sku: "KLZ-MMS-01" },
   // Chemicals
-  { id: 5, name: "Premium Black Phenyl (20L)", category: "chemicals", price: 850, unit: "can", image: "🧪", sku: "KLZ-PH-20L" },
-  { id: 6, name: "Glass Cleaner Concentrate (5L)", category: "chemicals", price: 420, unit: "bottle", image: "✨", sku: "KLZ-GC-5L" },
-  { id: 7, name: "Industrial Detergent Powder (25kg)", category: "chemicals", price: 1200, unit: "bag", image: "🫧", sku: "KLZ-DP-25K" },
-  { id: 8, name: "Surface Sanitizer (5L)", category: "chemicals", price: 680, unit: "bottle", image: "🦠", sku: "KLZ-SS-5L" },
-  { id: 9, name: "Floor Cleaner Liquid (20L)", category: "chemicals", price: 950, unit: "can", image: "🧴", sku: "KLZ-FC-20L" },
-  { id: 10, name: "Toilet Bowl Cleaner (5L)", category: "chemicals", price: 380, unit: "bottle", image: "🚽", sku: "KLZ-TC-5L" },
+  { id: 5, name: "Premium Black Phenyl (20L)", category: "chemicals", price: 349, unit: "can", image: "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=400&h=400&fit=crop", sku: "KLZ-PH-20L" },
+  { id: 6, name: "Glass Cleaner Concentrate (5L)", category: "chemicals", price: 189, unit: "bottle", image: "https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?w=400&h=400&fit=crop", sku: "KLZ-GC-5L" },
+  { id: 7, name: "Industrial Detergent Powder (25kg)", category: "chemicals", price: 599, unit: "bag", image: "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=400&h=400&fit=crop", sku: "KLZ-DP-25K" },
+  { id: 8, name: "Surface Sanitizer (5L)", category: "chemicals", price: 279, unit: "bottle", image: "https://images.unsplash.com/photo-1584813470613-5b1c1cad3d69?w=400&h=400&fit=crop", sku: "KLZ-SS-5L" },
+  { id: 9, name: "Floor Cleaner Liquid (20L)", category: "chemicals", price: 449, unit: "can", image: "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&h=400&fit=crop", sku: "KLZ-FC-20L" },
+  { id: 10, name: "Toilet Bowl Cleaner (5L)", category: "chemicals", price: 149, unit: "bottle", image: "https://images.unsplash.com/photo-1585421514738-01798e348b17?w=400&h=400&fit=crop", sku: "KLZ-TC-5L" },
   // Safety
-  { id: 11, name: "Safety Gloves (Box of 100)", category: "safety", price: 650, unit: "box", image: "🧤", sku: "KLZ-SG-100" },
-  { id: 12, name: "Safety Goggles", category: "safety", price: 250, unit: "pair", image: "🥽", sku: "KLZ-GO-01" },
+  { id: 11, name: "Safety Gloves (Box of 100)", category: "safety", price: 299, unit: "box", image: "https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&h=400&fit=crop", sku: "KLZ-SG-100" },
+  { id: 12, name: "Safety Goggles", category: "safety", price: 99, unit: "pair", image: "https://images.unsplash.com/photo-1574482620811-1aa16ffe3c76?w=400&h=400&fit=crop", sku: "KLZ-GO-01" },
 ];
 
 const categories = [
@@ -178,8 +178,12 @@ export default function Shop() {
                 className="klenzo-card overflow-hidden group"
               >
                 {/* Product Image Area */}
-                <div className="aspect-square bg-muted flex items-center justify-center text-6xl group-hover:scale-105 transition-transform duration-300">
-                  {product.image}
+                <div className="aspect-square bg-muted overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
                 {/* Product Details */}

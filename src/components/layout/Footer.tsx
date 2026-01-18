@@ -68,7 +68,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2 text-sm text-primary-foreground/80">
                 <MapPin className="h-4 w-4 text-accent mt-0.5" />
-                Mumbai, Maharashtra, India
+                New Delhi, Delhi, India
               </li>
             </ul>
           </div>
@@ -77,7 +77,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-primary-foreground/60">
-              © 2025 Klenzo. All rights reserved.
+              © 2026 Klenzo. All rights reserved.
             </p>
             <div className="flex gap-6">
               <span className="text-sm text-primary-foreground/60 hover:text-accent cursor-pointer transition-colors">
